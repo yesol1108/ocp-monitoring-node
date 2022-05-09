@@ -1,7 +1,6 @@
 const app = App()
-const proxyurl = 'https://cors-anywhere-ys.herokuapp.com/';
 const apiurl = 'https://api.ocp49.sandbox1231.opentlc.com:6443';
-const apitoken = 'Bearer sha256~RbgIFhS5q1rYfCuJVTzXh0YWcHkddwmvSO5zlW2hMRg';
+const apitoken = 'sha256~rv3K6P46FzJTvh9JMqLjyTNlXktdVrYFCv7SZjc4g6M';
 let lastResourceVersion;
 
 fetch(apiurl+'/api/v1/pods', {
@@ -95,13 +94,14 @@ function App() {
       return
     }
     const podsByNode = groupBy(pods, (it) => it.nodeName)
+
     const nodeTemplates = Object.keys(podsByNode).map((nodeName) => {
       const pods = podsByNode[nodeName]
       return [
         '<li class="w5 mv4">',
         '<div>',
         `<p class="white ttu tc b f5 lh-copy">${nodeName}</p>`,
-        `<div class="bg-dark-pink ba bw2 b--pink w4 h4 center">${renderNode(pods)}</div>`,
+        `<div class="bg-dark-pink ba bw2 w4 b--pink center">${renderNode(pods)}</div>`,
         '</div>',
         '</li>',
       ].join('')
